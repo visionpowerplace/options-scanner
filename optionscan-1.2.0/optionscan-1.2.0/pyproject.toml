@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "optionscan"
+version = "1.0.0"
+description = "Daily options scanner: regime-aware setup screening with full trade plans and position sizing"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.10",
+    "yfinance>=0.2.40",
+    "PyYAML>=6.0",
+]
+
+[project.scripts]
+optionscan = "optionscan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["optionscan*"]
