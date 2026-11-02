@@ -1,0 +1,96 @@
+name: Daily options scan
+
+on:
+  schedule:
+    - cron: "45 21 * * 1-5"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: options-scan
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate the package
+        id: loc
+        run: |
+          F=$(find . -path '*/optionscan/cli.py' | head -1)
+          if [ -z "$F" ]; then echo "optionscan package not found"; exit 1; fi
+          D=$(dirname "$(dirname "$F")")
+          echo "dir=$D" >> "$GITHUB_OUTPUT"
+          echo "Package root: $D"
+
+      - name: Install dependencies
+        working-directory: ${{ steps.loc.outputs.dir }}
+        run: pip install -r requirements.txt
+
+      - name: Restore IV history
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.optionscan
+          key: iv-${{ github.run_id }}
+          restore-keys: iv-
+
+      - name: Run the scan
+        working-directory: ${{ steps.loc.outputs.dir }}
+        run: |
+          ARGS="--provider yahoo --quiet"
+          ARGS="$ARGS --universe ${{ vars.UNIVERSE || 'liquid' }}"
+          ARGS="$ARGS --account ${{ vars.ACCOUNT_SIZE || '500' }}"
+          ARGS="$ARGS --risk ${{ vars.RISK_PCT || '20' }}"
+          if [ -f "micro-500.yaml" ]; then ARGS="$ARGS --config micro-500.yaml"; fi
+          python -m optionscan scan $ARGS
+
+      - name: Save IV history
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.optionscan
+          key: iv-${{ github.run_id }}
+
+      - name: Collect reports
+        run: |
+          mkdir -p public
+          cp ${{ steps.loc.outputs.dir }}/output/* public/ 2>/dev/null || true
+          L=$(ls -t public/scan_*.html 2>/dev/null | head -1)
+          if [ -n "$L" ]; then cp "$L" public/index.html; else echo "<h1>No report produced</h1>" > public/index.html; fi
+          ls -la public
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: scan-${{ github.run_number }}
+          path: public
+          retention-days: 90
+
+      - name: Configure Pages
+        if: vars.PUBLISH_PAGES == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: vars.PUBLISH_PAGES == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    if: vars.PUBLISH_PAGES == 'true'
+    needs: scan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
