@@ -1,0 +1,90 @@
+account:
+  account_size: 25000.0
+  risk_per_trade_pct: 1.0
+  max_portfolio_heat_pct: 6.0
+  max_capital_per_trade_pct: 20.0
+  max_contracts: 50
+  commission_per_contract: 0.65
+  fill_slippage: 0.4
+liquidity:
+  min_open_interest: 200
+  min_volume: 0
+  max_spread_pct: 0.1
+  max_spread_abs: 1.5
+  min_bid: 0.05
+  require_two_sided: true
+  min_mid: 0.1
+dte:
+  credit:
+  - 25
+  - 45
+  debit:
+  - 30
+  - 60
+  long:
+  - 45
+  - 90
+  condor:
+  - 30
+  - 50
+deltas:
+  long_option: 0.55
+  debit_long: 0.6
+  debit_short: 0.3
+  credit_short: 0.25
+  condor_short: 0.17
+  csp_short: 0.25
+  cc_short: 0.3
+width:
+  pct_of_spot: 0.045
+  min_dollars: 1.0
+  max_dollars: 30.0
+filters:
+  min_price: 12.0
+  max_price: 2000.0
+  min_avg_dollar_volume: 25000000.0
+  min_history_days: 120
+regime:
+  iv_rich: 62.0
+  iv_cheap: 32.0
+  min_trend_score: 18.0
+  min_trend_strength_directional: 40.0
+  min_adx_directional: 18.0
+  max_extension_atr: 3.0
+  neutral_band: 18.0
+earnings:
+  allow_through_earnings: false
+  block_credit_within_days: 3
+  warn_window_days: 10
+  score_penalty: 18.0
+scoring:
+  regime_fit: 22.0
+  premium_edge: 20.0
+  expected_value: 18.0
+  probability: 15.0
+  liquidity: 15.0
+  structure: 10.0
+output:
+  directory: ./output
+  max_ideas: 15
+  max_per_ticker: 2
+  min_score: 50.0
+  html: true
+  csv: true
+  json: true
+  open_browser: false
+provider: yahoo
+benchmark: SPY
+tickers: []
+max_workers: 6
+use_cache: true
+strategies_enabled:
+- long_call
+- long_put
+- call_debit_spread
+- put_debit_spread
+- put_credit_spread
+- call_credit_spread
+- iron_condor
+- cash_secured_put
+- covered_call
