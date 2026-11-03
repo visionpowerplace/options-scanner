@@ -52,6 +52,7 @@ DRY RUN -- would POST /v2/orders:
   "client_order_id": "SLV-2026-12-18-put_debit_spread"
 }
   NOFILL SLV    worked to +0.83..+0.88, no fill
+Dry run -- journal NOT written.
 ==========================================================================
 Entered 0   exits 0   skipped 2   open now 0
 Account equity: $5,000.00
