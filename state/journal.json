@@ -1,0 +1,94 @@
+[
+  {
+    "id": "INTC-2026-12-18-put_debit_spread",
+    "ticker": "INTC",
+    "strategy": "put_debit_spread",
+    "opened_on": "2026-11-03",
+    "expiry": "2026-12-18",
+    "legs": [
+      {
+        "symbol": "INTC261218P00050000",
+        "side": "buy",
+        "ratio": 1
+      },
+      {
+        "symbol": "INTC261218P00047000",
+        "side": "sell",
+        "ratio": 1
+      }
+    ],
+    "qty": 1,
+    "score": 82.0,
+    "pop": 0.2394,
+    "pop_at_rv": 0.0,
+    "breakeven_win_rate": 0.2002,
+    "ev_at_rv": 63.09,
+    "scan_net": 0.58,
+    "iv_rank": 0.0,
+    "iv_rv_ratio": 0.661,
+    "entry_order_id": "dry-INTC-2026-12-18-put_debit_spread",
+    "entry_net": null,
+    "entry_slippage": 0.0,
+    "target_net": 0.0,
+    "stop_net": 0.0,
+    "time_stop_dte": 14,
+    "max_loss": 57.999999999999986,
+    "status": "abandoned",
+    "exit_order_id": "",
+    "exit_net": null,
+    "closed_on": "",
+    "exit_reason": "",
+    "pnl": null,
+    "exit_attempts": 0,
+    "pending_exit_reason": "",
+    "notes": [
+      "no fill while working the limit; order cancelled"
+    ]
+  },
+  {
+    "id": "SLV-2026-12-18-put_debit_spread",
+    "ticker": "SLV",
+    "strategy": "put_debit_spread",
+    "opened_on": "2026-11-03",
+    "expiry": "2026-12-18",
+    "legs": [
+      {
+        "symbol": "SLV261218P00044000",
+        "side": "buy",
+        "ratio": 1
+      },
+      {
+        "symbol": "SLV261218P00041000",
+        "side": "sell",
+        "ratio": 1
+      }
+    ],
+    "qty": 1,
+    "score": 66.9,
+    "pop": 0.3773,
+    "pop_at_rv": 0.0,
+    "breakeven_win_rate": 0.3276,
+    "ev_at_rv": 15.34,
+    "scan_net": 0.9,
+    "iv_rank": 57.9,
+    "iv_rv_ratio": 1.281,
+    "entry_order_id": "dry-SLV-2026-12-18-put_debit_spread",
+    "entry_net": null,
+    "entry_slippage": 0.0,
+    "target_net": 0.0,
+    "stop_net": 0.0,
+    "time_stop_dte": 14,
+    "max_loss": 90.25000000000001,
+    "status": "abandoned",
+    "exit_order_id": "",
+    "exit_net": null,
+    "closed_on": "",
+    "exit_reason": "",
+    "pnl": null,
+    "exit_attempts": 0,
+    "pending_exit_reason": "",
+    "notes": [
+      "no fill while working the limit; order cancelled"
+    ]
+  }
+]
