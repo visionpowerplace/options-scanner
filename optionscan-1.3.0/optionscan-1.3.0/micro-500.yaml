@@ -1,0 +1,123 @@
+# ===================================================================
+# optionscan - $500 micro account, nothing costing more than $1.00
+# ===================================================================
+# Run with:  python -m optionscan scan --config micro-500.yaml
+#
+# Read the notes. Several of these numbers are far outside what the tool
+# recommends by default, and they are set this way because you asked for
+# them, not because they are safe.
+
+account:
+  account_size: 500.0
+
+  # DEFAULT IS 1%. At $500 that is $5 a trade, which buys nothing, so it has
+  # to be 20% ($100) for sub-$1 options to be reachable at all.
+  # Understand what you are agreeing to: five losses in a row takes the
+  # account to roughly $160, and five losses in a row is an ordinary run for
+  # long options. This number, not the scanner, is your main risk.
+  risk_per_trade_pct: 20.0
+
+  # Two positions at full risk. Do not carry more than two at once.
+  max_portfolio_heat_pct: 40.0
+  max_capital_per_trade_pct: 20.0
+  max_contracts: 2
+
+  # SET THIS TO YOUR BROKER'S ACTUAL RATE. On a $75 trade, $0.65/contract
+  # round trip is 1.7% of the position -- a zero-commission broker is worth
+  # more to you than to anyone else trading.
+  commission_per_contract: 0.0
+
+  # Pessimistic fill assumption. Cheap options have wide relative spreads and
+  # you will not get the mid.
+  fill_slippage: 0.50
+
+filters:
+  # Your hard ceiling: $1.00 per share = $100 per contract. Anything costing
+  # more is rejected and listed as "over price cap" in the report.
+  max_debit_per_share: 1.00
+  min_price: 10.0
+  max_price: 700.0
+  min_avg_dollar_volume: 150000000.0   # only the deepest names
+  min_history_days: 120
+
+liquidity:
+  # Tighter than default, and this is the setting that matters most to you.
+  # On a $0.75 option, a 0.70/0.80 market costs 13% round trip -- you are
+  # down 7% the instant you are filled. That friction, not direction, is what
+  # kills small accounts trading cheap options.
+  min_open_interest: 500      # deep enough to exit; 1000+ cuts the wings off
+  min_volume: 0               # volume is near zero early in the session
+  max_spread_pct: 0.12
+  max_spread_abs: 0.08        # the real protection: never cross 8c of spread
+  min_bid: 0.05
+  min_mid: 0.12               # below ~12c the spread IS the trade
+  require_two_sided: true
+
+deltas:
+  # Debit spreads start cheaper so they fit the budget without going so far
+  # out of the money that they cannot pay.
+  debit_long: 0.50
+  debit_short: 0.28
+  credit_short: 0.22
+  condor_short: 0.16
+  long_option: 0.45
+
+width:
+  # $1-wide structures. This is why SPY/QQQ matter: their $1 strike ladder
+  # lets a defined-risk spread exist at all at this account size.
+  pct_of_spot: 0.004
+  min_dollars: 1.0
+  max_dollars: 2.5
+
+dte:
+  credit: [25, 45]
+  debit: [30, 60]
+  long:  [45, 90]
+  condor: [30, 50]
+
+regime:
+  # The guard that matters most at this size. When a structure is too
+  # expensive the scanner narrows it; without this floor it keeps narrowing
+  # until it finds a 0.07-delta spread that costs $14 and wins 5% of the time.
+  # Cheap options are cheap BECAUSE they rarely pay. Nothing below a 30%
+  # chance of profit gets suggested.
+  min_pop: 0.30
+
+earnings:
+  allow_through_earnings: false
+
+# Cash-secured puts and covered calls need thousands in collateral, so they
+# are off: the scanner would reject them anyway, this just skips the work.
+strategies_enabled:
+  - call_debit_spread
+  - put_debit_spread
+  - put_credit_spread
+  - call_credit_spread
+  - iron_condor
+  - long_call
+  - long_put
+
+# The deepest, tightest-quoted options in the market. On a small account the
+# bid/ask is your biggest expense, so vehicle choice beats stock picking.
+tickers:
+  - SPY
+  - QQQ
+  - IWM
+  - XLF
+  - SMH
+  - AAPL
+  - NVDA
+  - AMD
+  - INTC
+  - F
+  - SOFI
+  - PLTR
+  - BAC
+  - T
+  - WMT
+
+output:
+  min_score: 50.0
+  max_ideas: 6
+  max_per_ticker: 1
+  directory: ./output
