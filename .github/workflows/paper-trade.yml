@@ -1,0 +1,109 @@
+# =====================================================================
+# Paper trading. Runs each weekday MORNING, acting on the previous
+# evening's scan. PAPER ACCOUNT ONLY -- the Alpaca adapter refuses to
+# talk to the live endpoint.
+#
+# Needs two repository SECRETS (Settings > Secrets and variables >
+# Actions > Secrets):
+#     ALPACA_API_KEY_ID
+#     ALPACA_API_SECRET_KEY
+# Generate PAPER keys at https://app.alpaca.markets
+# =====================================================================
+name: Paper trade
+
+on:
+  schedule:
+    # 15:45 UTC = 9:45am Central while the US is on standard time
+    # (10:45am Central during daylight saving -- GitHub cron is UTC only).
+    # Deliberately ~75 minutes after the open: the first half hour has the
+    # widest spreads and the worst fills.
+    - cron: "45 15 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the order payloads without submitting them"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-trade
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate the package
+        id: loc
+        run: |
+          F=$(find . -path '*/optionscan/cli.py' | sort | tail -1)
+          if [ -z "$F" ]; then echo "optionscan package not found"; exit 1; fi
+          D=$(dirname "$(dirname "$F")")
+          echo "dir=$D" >> "$GITHUB_OUTPUT"
+          echo "Package root: $D"
+
+      - name: Install dependencies
+        working-directory: ${{ steps.loc.outputs.dir }}
+        run: pip install -r requirements.txt
+
+      - name: Check for a scan to trade
+        id: chk
+        run: |
+          if [ -f state/latest_scan.json ]; then
+            echo "ok=yes" >> "$GITHUB_OUTPUT"
+            python -c "import json;d=json.load(open('state/latest_scan.json'));print('scan from',d.get('as_of'),'with',len(d.get('ideas',[])),'ideas')"
+          else
+            echo "ok=no" >> "$GITHUB_OUTPUT"
+            echo "No state/latest_scan.json yet -- run the scan workflow first."
+          fi
+
+      - name: Trade
+        if: steps.chk.outputs.ok == 'yes'
+        working-directory: ${{ steps.loc.outputs.dir }}
+        env:
+          ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
+          ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
+          OPTIONSCAN_HOME: ${{ github.workspace }}/state
+        run: |
+          if [ -z "$ALPACA_API_KEY_ID" ]; then
+            echo "::error::Alpaca paper keys are not set. Add ALPACA_API_KEY_ID and ALPACA_API_SECRET_KEY as repository Secrets."
+            exit 1
+          fi
+          EXTRA=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then EXTRA="--dry-run"; fi
+          python -m optionscan trade \
+            --broker alpaca \
+            --ideas "${{ github.workspace }}/state/latest_scan.json" \
+            --journal "${{ github.workspace }}/state/journal.json" \
+            --max-new ${{ vars.MAX_NEW_PER_DAY || '1' }} \
+            --max-open ${{ vars.MAX_OPEN || '3' }} \
+            $EXTRA | tee "${{ github.workspace }}/state/last_session.txt"
+
+      - name: Commit the journal
+        if: always()
+        run: |
+          git config user.name "options-scanner"
+          git config user.email "actions@github.com"
+          git add state/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No journal changes."
+          else
+            git commit -m "paper trade session $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trade-session-${{ github.run_number }}
+          path: state/
+          retention-days: 90
