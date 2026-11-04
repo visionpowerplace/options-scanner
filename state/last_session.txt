@@ -1,3 +1,3 @@
-Loaded 2 idea(s) from /home/runner/work/options-scanner/options-scanner/state/latest_scan.json
+Loaded 1 idea(s) from /home/runner/work/options-scanner/options-scanner/state/latest_scan.json
 The market is closed. Orders would queue until the next session.
 Re-run during market hours, or pass --force to submit anyway.
