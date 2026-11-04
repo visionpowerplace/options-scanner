@@ -1,291 +1,103 @@
 {
-  "as_of": "2026-11-03T00:50:35.784243",
+  "as_of": "2026-11-04T01:39:37.699855",
   "provider": "yahoo",
   "universe_size": 70,
   "scanned": 70,
   "heat": {
-    "total_risk": 148.25,
-    "total_capital": 148.25,
-    "pct_risked": 29.65,
-    "pct_capital": 29.65,
+    "total_risk": 59.5,
+    "total_capital": 59.5,
+    "pct_risked": 11.9,
+    "pct_capital": 11.9,
     "heat_limit_pct": 40.0,
     "over_limit": false
   },
   "advisories": [
-    "DATA PROBLEM: 1 of 70 symbols returned no usable data (1% of the universe). The remaining symbols scanned normally, but treat the idea list as partial."
+    "DATA PROBLEM: 1 of 70 symbols returned no usable data (1% of the universe). The remaining symbols scanned normally, but treat the idea list as partial.",
+    "1 underlying(s) produced valid structures that were too large for your $500 account at 20% risk per trade ($100). The cheapest rejected structure risked $135/contract, which would need risk_per_trade_pct >= 27.0%. Options trade in whole contracts, so small accounts are genuinely limited to lower-priced underlyings and narrow spreads -- that is a real constraint, not a setting to force."
   ],
   "errors": [],
   "ideas": [
     {
       "rank": 1,
-      "ticker": "INTC",
-      "strategy": "put_debit_spread",
-      "strategy_name": "Bear Put Debit Spread",
-      "score": 82.0,
-      "spot": 59.970001220703125,
-      "expiry": "2026-12-18",
-      "dte": 45,
-      "order": "BUY  1 18-Dec-26 50 PUT / SELL 1 18-Dec-26 47 PUT",
-      "net_cash": -58.0,
-      "entry_limit": 0.58,
-      "entry_type": "debit",
-      "max_profit": 242.0,
-      "max_loss": 57.999999999999986,
-      "breakevens": [
-        49.42
-      ],
-      "pop": 0.2394,
-      "required_pop": 0.2002,
-      "pop_edge": 0.2197,
-      "p_touch_short": 0.336,
-      "ev_at_rv": 63.09,
-      "ev_at_iv": 6.73,
-      "contracts": 1,
-      "risk_dollars": 58.0,
-      "capital_required": 58.0,
-      "net_delta": -0.0544,
-      "net_theta": -0.72,
-      "net_vega": 1.15,
-      "iv_rank": 0.0,
-      "iv_rank_source": "rv_proxy",
-      "iv_rv_ratio": 0.661,
-      "atm_iv": 0.6368,
-      "trend_label": "strong_downtrend",
-      "trend_score": -81.2,
-      "adx": 29.7,
-      "earnings_in_days": 86,
-      "liq_score": 71.8,
-      "profit_target_price": 2.03,
-      "stop_price": 0.29,
-      "time_stop_dte": 14,
-      "components": {
-        "regime_fit": 69.2,
-        "premium_edge": 100.0,
-        "expected_value": 100.0,
-        "probability": 100.0,
-        "liquidity": 71.8,
-        "structure": 100.0
-      },
-      "penalties": {
-        "iv_rank_estimated": 3.0,
-        "vol_assumption_heavy": 4.0
-      },
-      "reasons": [
-        "Bearish structure aligned with a strong downtrend (score -81, strength 66, ADX 30, R\u00b2 0.39)",
-        "IV rank 0 (rv_proxy) -- premium is cheap, favourable for a buyer",
-        "IV only 0.66x realised vol -- not overpaying for movement",
-        "Expected value +$63/contract on $58 at risk (+882%/yr annualised) if the stock keeps moving the way it has been",
-        "Needs a 20% win rate to break even (risking ~$57 to make ~$230 on average); gets 42% at the stock's realised vol -- a +22% edge. At implied vol it is 24%, and that gap is the volatility premium you are being paid",
-        "Risk-reward 4.17:1 -- making $242 against $58 risked"
-      ],
-      "warnings": [
-        "Price 4.6 ATR from its 21-EMA -- chasing an extended move",
-        "Edge depends substantially on realised vol (42% POP) staying below implied (24% POP). If volatility expands, this turns against you"
-      ],
-      "legs": [
-        {
-          "action": "buy",
-          "kind": "put",
-          "strike": 50.0,
-          "expiry": "2026-12-18",
-          "dte": 45,
-          "bid": 1.63,
-          "ask": 1.68,
-          "mid": 1.6549999999999998,
-          "iv": 0.6878029605621434,
-          "delta": -0.1856737402002342,
-          "gamma": 0.018472208357833607,
-          "theta": -0.04165656290067623,
-          "vega": 0.05633400449620564,
-          "open_interest": 12783,
-          "volume": 4024,
-          "contract": "INTC261218P00050000",
-          "qty": 1
-        },
-        {
-          "action": "sell",
-          "kind": "put",
-          "strike": 47.0,
-          "expiry": "2026-12-18",
-          "dte": 45,
-          "bid": 1.07,
-          "ask": 1.14,
-          "mid": 1.105,
-          "iv": 0.7110285035421289,
-          "delta": -0.13122626871231147,
-          "gamma": 0.014221366146507165,
-          "theta": -0.03444188556954043,
-          "vega": 0.0448348884597456,
-          "open_interest": 6673,
-          "volume": 388,
-          "contract": "INTC261218P00047000",
-          "qty": 1
-        }
-      ],
-      "plan": {
-        "entry_limit": 0.58,
-        "entry_limit_worst": 0.64,
-        "entry_type": "debit",
-        "entry_conditions": [
-          "Work a LIMIT order to BUY the spread for $0.58 debit. Do not pay more than $0.64. Start at the mid and walk up a penny at a time; never buy at the natural ask.",
-          "Place the order between 10:00 and 15:30 ET. The first and last 30 minutes have the widest spreads and the worst fills.",
-          "CAUTION: price is 4.6 ATR below its 21-EMA -- stretched to the downside. Prefer a bounce toward 59.97-66.90 before entering."
-        ],
-        "profit_target_price": 2.03,
-        "profit_target_pnl": 145.0,
-        "profit_target_label": "60% of max profit",
-        "stop_price": 0.29,
-        "stop_pnl": -29.0,
-        "stop_label": "-50% on the debit",
-        "time_stop_dte": 14,
-        "invalidation_level": 72.44,
-        "invalidation_label": "bearish thesis fails on a close above 72.44 (1.8 ATR up)",
-        "exit_rules": [
-          "PROFIT: GTC limit to SELL the spread at $2.03 (60% of max, $145/contract). Waiting for the last few cents of a vertical means holding the worst risk-reward of the whole trade.",
-          "STOP: close at $0.29 (-$29/contract).",
-          "TIME: close by 14 DTE; a debit spread that has not worked by then usually will not.",
-          "UNDERLYING: bearish thesis fails on a close above 72.44 (1.8 ATR up).",
-          "Never add to a loser. If the thesis breaks, take the loss and look at the next scan."
-        ]
-      },
-      "size": {
-        "contracts": 1,
-        "risk_dollars": 58.0,
-        "capital_required": 58.0,
-        "pct_of_account_risked": 11.6,
-        "pct_of_account_capital": 11.6,
-        "limiting_factor": "risk limit",
-        "stress_loss": 58.0,
-        "warnings": []
-      },
-      "trend": {
-        "label": "strong_downtrend",
-        "score": -81.2,
-        "strength": 66.5,
-        "adx": 29.7,
-        "rsi": 23.0,
-        "macd_hist": -3.082,
-        "ema_stack": "---+",
-        "slope_ann": -2.131,
-        "slope_r2": 0.391,
-        "atr_pct": 0.1155,
-        "ext_atr": -4.56,
-        "range_pos": 0.008,
-        "rel_strength": -0.3805,
-        "components": {
-          "ema_stack": -0.5,
-          "slope": -0.711,
-          "macd": -0.751,
-          "rsi": -1.0,
-          "range_pos": -1.0,
-          "rel_strength": -1.0,
-          "long_term": -1.0,
-          "thrust": -1.0
-        },
-        "notes": [
-          "4.6 ATR from 21-EMA -- extended, poor entry location",
-          "RSI 23 -- oversold"
-        ]
-      },
-      "vol": {
-        "atm_iv": 0.6368,
-        "rv20": 1.2871,
-        "rv60": 0.9322,
-        "parkinson20": 0.5042,
-        "iv_rv_ratio": 0.661,
-        "iv_rank": 0.0,
-        "iv_rank_source": "rv_proxy",
-        "iv_rank_obs": 400,
-        "iv_percentile": null,
-        "label": "cheap",
-        "term_slope": 1.638,
-        "notes": [
-          "IV rank is ESTIMATED from IV/RV (no IV history yet); it becomes a true IV rank after ~40 daily runs",
-          "front-month IV 1.64x back month -- event premium in the front",
-          "IV/RV 0.66 -- options cheap vs actual movement; favour buying premium"
-        ]
-      }
-    },
-    {
-      "rank": 2,
       "ticker": "SLV",
       "strategy": "put_debit_spread",
       "strategy_name": "Bear Put Debit Spread",
-      "score": 66.9,
-      "spot": 45.56999969482422,
+      "score": 61.4,
+      "spot": 44.84,
       "expiry": "2026-12-18",
-      "dte": 45,
-      "order": "BUY  1 18-Dec-26 44 PUT / SELL 1 18-Dec-26 41 PUT",
-      "net_cash": -90.25,
-      "entry_limit": 0.9,
+      "dte": 44,
+      "order": "BUY  2 18-Dec-26 42 PUT / SELL 2 18-Dec-26 41 PUT",
+      "net_cash": -29.75,
+      "entry_limit": 0.3,
       "entry_type": "debit",
-      "max_profit": 209.75,
-      "max_loss": 90.25000000000001,
+      "max_profit": 70.25000000000001,
+      "max_loss": 29.749999999999986,
       "breakevens": [
-        43.1
+        41.7
       ],
-      "pop": 0.3773,
-      "required_pop": 0.3276,
-      "pop_edge": 0.0582,
-      "p_touch_short": 0.4905,
-      "ev_at_rv": 15.34,
-      "ev_at_iv": 12.43,
-      "contracts": 1,
-      "risk_dollars": 90.25,
-      "capital_required": 90.25,
-      "net_delta": -0.1507,
-      "net_theta": -0.41,
-      "net_vega": 1.35,
-      "iv_rank": 57.9,
+      "pop": 0.3379,
+      "pop_at_rv": 0.3421,
+      "required_pop": 0.3076,
+      "pop_edge": 0.0345,
+      "p_touch_short": 0.5681,
+      "ev_at_rv": 3.29,
+      "ev_at_iv": 2.85,
+      "contracts": 2,
+      "risk_dollars": 59.5,
+      "capital_required": 59.5,
+      "net_delta": -0.049,
+      "net_theta": -0.16,
+      "net_vega": 0.47,
+      "iv_rank": 60.4,
       "iv_rank_source": "rv_proxy",
-      "iv_rv_ratio": 1.281,
-      "atm_iv": 0.4493,
+      "iv_rv_ratio": 1.305,
+      "atm_iv": 0.458,
       "trend_label": "strong_downtrend",
       "trend_score": -92.9,
       "adx": 33.4,
       "earnings_in_days": null,
-      "liq_score": 67.3,
-      "profit_target_price": 2.16,
-      "stop_price": 0.45,
+      "liq_score": 71.6,
+      "profit_target_price": 0.72,
+      "stop_price": 0.15,
       "time_stop_dte": 14,
       "components": {
         "regime_fit": 80.0,
-        "premium_edge": 31.2,
-        "expected_value": 100.0,
-        "probability": 53.2,
-        "liquidity": 67.3,
-        "structure": 100.0
+        "premium_edge": 26.7,
+        "expected_value": 79.8,
+        "probability": 44.0,
+        "liquidity": 71.6,
+        "structure": 97.4
       },
       "penalties": {
         "iv_rank_estimated": 3.0
       },
       "reasons": [
         "Bearish structure aligned with a strong downtrend (score -93, strength 86, ADX 33, R\u00b2 0.87)",
-        "Expected value +$15/contract on $90 at risk (+138%/yr annualised) if the stock keeps moving the way it has been",
-        "Needs a 33% win rate to break even (risking ~$86 to make ~$177 on average); gets 39% at the stock's realised vol -- a +6% edge. At implied vol it is 38%, and that gap is the volatility premium you are being paid",
-        "Risk-reward 2.32:1 -- making $210 against $90 risked"
+        "Expected value +$3/contract on $30 at risk (+92%/yr annualised) if the stock keeps moving the way it has been"
       ],
       "warnings": [
-        "Price 3.1 ATR from its 21-EMA -- chasing an extended move"
+        "Price 3.1 ATR from its 21-EMA -- chasing an extended move",
+        "57% chance of touching the short strike before expiry -- expect it to look ugly even if it finishes a winner",
+        "Risk-reward looks attractive at 2.4:1, but it only wins 34% of the time -- the payoff ratio is high because the odds are poor, not because it is good value"
       ],
       "legs": [
         {
           "action": "buy",
           "kind": "put",
-          "strike": 44.0,
+          "strike": 42.0,
           "expiry": "2026-12-18",
-          "dte": 45,
-          "bid": 1.76,
-          "ask": 1.83,
-          "mid": 1.795,
-          "iv": 0.4143375773068735,
-          "delta": -0.364116997296861,
-          "gamma": 0.056649838814901834,
-          "theta": -0.025659719620792075,
-          "vega": 0.06009394310938174,
-          "open_interest": 2094,
-          "volume": 526,
-          "contract": "SLV261218P00044000",
+          "dte": 44,
+          "bid": 1.34,
+          "ask": 1.39,
+          "mid": 1.365,
+          "iv": 0.4354430151012977,
+          "delta": -0.2944360456934074,
+          "gamma": 0.050851354977393584,
+          "theta": -0.024950247451490846,
+          "vega": 0.053669169873539396,
+          "open_interest": 7387,
+          "volume": 1869,
+          "contract": "SLV261218P00042000",
           "qty": 1
         },
         {
@@ -293,55 +105,55 @@
           "kind": "put",
           "strike": 41.0,
           "expiry": "2026-12-18",
-          "dte": 45,
-          "bid": 0.9,
-          "ask": 0.94,
-          "mid": 0.9199999999999999,
-          "iv": 0.4389212386040314,
-          "delta": -0.21341850071986035,
-          "gamma": 0.04142616580751855,
-          "theta": -0.021541615185196063,
-          "vega": 0.046552074138757844,
-          "open_interest": 1588,
-          "volume": 368,
+          "dte": 44,
+          "bid": 1.07,
+          "ask": 1.11,
+          "mid": 1.09,
+          "iv": 0.44431213050716994,
+          "delta": -0.24543056485476278,
+          "gamma": 0.04548938153446242,
+          "theta": -0.023400245273540735,
+          "vega": 0.048987945111440154,
+          "open_interest": 1689,
+          "volume": 88,
           "contract": "SLV261218P00041000",
           "qty": 1
         }
       ],
       "plan": {
-        "entry_limit": 0.9,
-        "entry_limit_worst": 0.99,
+        "entry_limit": 0.3,
+        "entry_limit_worst": 0.33,
         "entry_type": "debit",
         "entry_conditions": [
-          "Work a LIMIT order to BUY the spread for $0.90 debit. Do not pay more than $0.99. Start at the mid and walk up a penny at a time; never buy at the natural ask.",
+          "Work a LIMIT order to BUY the spread for $0.30 debit. Do not pay more than $0.33. Start at the mid and walk up a penny at a time; never buy at the natural ask.",
           "Place the order between 10:00 and 15:30 ET. The first and last 30 minutes have the widest spreads and the worst fills.",
-          "CAUTION: price is 3.1 ATR below its 21-EMA -- stretched to the downside. Prefer a bounce toward 45.57-47.18 before entering."
+          "CAUTION: price is 3.1 ATR below its 21-EMA -- stretched to the downside. Prefer a bounce toward 44.84-46.45 before entering."
         ],
-        "profit_target_price": 2.16,
-        "profit_target_pnl": 125.75,
+        "profit_target_price": 0.72,
+        "profit_target_pnl": 42.25,
         "profit_target_label": "60% of max profit",
-        "stop_price": 0.45,
-        "stop_pnl": -45.13,
+        "stop_price": 0.15,
+        "stop_pnl": -14.87,
         "stop_label": "-50% on the debit",
         "time_stop_dte": 14,
-        "invalidation_level": 48.46,
-        "invalidation_label": "bearish thesis fails on a close above 48.46 (1.8 ATR up)",
+        "invalidation_level": 47.73,
+        "invalidation_label": "bearish thesis fails on a close above 47.73 (1.8 ATR up)",
         "exit_rules": [
-          "PROFIT: GTC limit to SELL the spread at $2.16 (60% of max, $126/contract). Waiting for the last few cents of a vertical means holding the worst risk-reward of the whole trade.",
-          "STOP: close at $0.45 (-$45/contract).",
+          "PROFIT: GTC limit to SELL the spread at $0.72 (60% of max, $42/contract). Waiting for the last few cents of a vertical means holding the worst risk-reward of the whole trade.",
+          "STOP: close at $0.15 (-$15/contract).",
           "TIME: close by 14 DTE; a debit spread that has not worked by then usually will not.",
-          "UNDERLYING: bearish thesis fails on a close above 48.46 (1.8 ATR up).",
+          "UNDERLYING: bearish thesis fails on a close above 47.73 (1.8 ATR up).",
           "Never add to a loser. If the thesis breaks, take the loss and look at the next scan."
         ]
       },
       "size": {
-        "contracts": 1,
-        "risk_dollars": 90.25,
-        "capital_required": 90.25,
-        "pct_of_account_risked": 18.05,
-        "pct_of_account_capital": 18.05,
-        "limiting_factor": "risk limit",
-        "stress_loss": 90.25,
+        "contracts": 2,
+        "risk_dollars": 59.5,
+        "capital_required": 59.5,
+        "pct_of_account_risked": 11.9,
+        "pct_of_account_capital": 11.9,
+        "limiting_factor": "max_contracts cap",
+        "stress_loss": 59.5,
         "warnings": []
       },
       "trend": {
@@ -373,20 +185,19 @@
         ]
       },
       "vol": {
-        "atm_iv": 0.4493,
+        "atm_iv": 0.458,
         "rv20": 0.4335,
         "rv60": 0.4045,
         "parkinson20": 0.1822,
-        "iv_rv_ratio": 1.281,
-        "iv_rank": 57.9,
+        "iv_rv_ratio": 1.305,
+        "iv_rank": 60.4,
         "iv_rank_source": "rv_proxy",
         "iv_rank_obs": 400,
         "iv_percentile": null,
         "label": "normal",
-        "term_slope": 1.602,
+        "term_slope": NaN,
         "notes": [
-          "IV rank is ESTIMATED from IV/RV (no IV history yet); it becomes a true IV rank after ~40 daily runs",
-          "front-month IV 1.60x back month -- event premium in the front"
+          "IV rank is ESTIMATED from IV/RV (no IV history yet); it becomes a true IV rank after ~40 daily runs"
         ]
       }
     }
@@ -400,7 +211,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 338.32
+      "spot": 331.9
     },
     {
       "ticker": "ABNB",
@@ -410,7 +221,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 171.11
+      "spot": 166.96
     },
     {
       "ticker": "ADBE",
@@ -420,7 +231,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 251.47
+      "spot": 246.14
     },
     {
       "ticker": "AMD",
@@ -430,7 +241,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 466.84
+      "spot": 483.9
     },
     {
       "ticker": "AMZN",
@@ -440,7 +251,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 245.63
+      "spot": 250.69
     },
     {
       "ticker": "ARKK",
@@ -450,7 +261,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 78.96
+      "spot": 80.32
     },
     {
       "ticker": "AVGO",
@@ -460,7 +271,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 322.23
+      "spot": 332.13
     },
     {
       "ticker": "BA",
@@ -470,7 +281,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 175.4
+      "spot": 173.31
     },
     {
       "ticker": "BAC",
@@ -480,7 +291,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 49.57
+      "spot": 49.66
     },
     {
       "ticker": "CAT",
@@ -490,7 +301,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 613.62
+      "spot": 623.94
     },
     {
       "ticker": "COIN",
@@ -500,7 +311,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 137.83
+      "spot": 145.45
     },
     {
       "ticker": "COP",
@@ -510,17 +321,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 146.84
+      "spot": 144.4
     },
     {
       "ticker": "COST",
       "status": "skipped",
-      "reason": "price $1,040.55 outside $10-$700",
+      "reason": "price $1,019.26 outside $10-$700",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 1040.55
+      "spot": 1019.26
     },
     {
       "ticker": "CRM",
@@ -530,7 +341,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 226.18
+      "spot": 222.2
     },
     {
       "ticker": "CVX",
@@ -540,7 +351,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 227.77
+      "spot": 225.27
     },
     {
       "ticker": "DIA",
@@ -550,7 +361,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 519.34
+      "spot": 517.06
     },
     {
       "ticker": "DIS",
@@ -560,7 +371,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 113.11
+      "spot": 114.18
     },
     {
       "ticker": "EEM",
@@ -570,7 +381,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 61.11
+      "spot": 61.1
     },
     {
       "ticker": "FXI",
@@ -580,7 +391,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 33.21
+      "spot": 33.19
     },
     {
       "ticker": "GE",
@@ -590,7 +401,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 315.78
+      "spot": 320.67
     },
     {
       "ticker": "GLD",
@@ -600,7 +411,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 361.65
+      "spot": 359.26
     },
     {
       "ticker": "GOOGL",
@@ -610,17 +421,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 278.99
+      "spot": 280.03
     },
     {
       "ticker": "GS",
       "status": "skipped",
-      "reason": "price $898.72 outside $10-$700",
+      "reason": "price $896.09 outside $10-$700",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 898.72
+      "spot": 896.09
     },
     {
       "ticker": "HD",
@@ -630,7 +441,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 341.15
+      "spot": 333.66
     },
     {
       "ticker": "HYG",
@@ -640,29 +451,32 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 76.89
+      "spot": 76.98
     },
     {
       "ticker": "INTC",
-      "status": "ok",
-      "reason": "",
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
       "trend": "strong_downtrend",
       "iv_rank": 0.0,
       "candidates": [
         "put_debit_spread"
       ],
-      "built": 1,
-      "spot": 59.97
+      "built": 0,
+      "spot": 60.55,
+      "too_large": [
+        "put_debit_spread: tightest version still risks $135/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "IWM",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score +2, ADX 28) and premium is not rich (IV rank 61) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 61.1,
       "candidates": [],
       "built": 0,
-      "spot": 279.14
+      "spot": 279.79
     },
     {
       "ticker": "JNJ",
@@ -672,7 +486,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 270.56
+      "spot": 266.17
     },
     {
       "ticker": "JPM",
@@ -682,7 +496,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 340.58
+      "spot": 337.98
     },
     {
       "ticker": "KO",
@@ -692,17 +506,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 95.83
+      "spot": 94.8
     },
     {
       "ticker": "LLY",
       "status": "skipped",
-      "reason": "price $1,410.99 outside $10-$700",
+      "reason": "price $1,409.38 outside $10-$700",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 1410.99
+      "spot": 1409.38
     },
     {
       "ticker": "MA",
@@ -712,7 +526,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 658.1
+      "spot": 647.18
     },
     {
       "ticker": "MCD",
@@ -722,7 +536,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 265.64
+      "spot": 263.04
     },
     {
       "ticker": "META",
@@ -732,7 +546,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 606.73
+      "spot": 621.03
     },
     {
       "ticker": "MRNA",
@@ -742,7 +556,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 220.83
+      "spot": 228.44
     },
     {
       "ticker": "MSFT",
@@ -752,17 +566,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 507.12
+      "spot": 520.99
     },
     {
       "ticker": "MU",
       "status": "skipped",
-      "reason": "price $833.59 outside $10-$700",
+      "reason": "price $855.10 outside $10-$700",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 833.59
+      "spot": 855.1
     },
     {
       "ticker": "NFLX",
@@ -772,7 +586,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 62.34
+      "spot": 63.42
     },
     {
       "ticker": "NVDA",
@@ -782,7 +596,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 202.06
+      "spot": 206.69
     },
     {
       "ticker": "ORCL",
@@ -792,7 +606,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 119.22
+      "spot": 126.19
     },
     {
       "ticker": "PEP",
@@ -802,7 +616,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 140.42
+      "spot": 137.27
     },
     {
       "ticker": "PFE",
@@ -812,7 +626,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 30.67
+      "spot": 30.0
     },
     {
       "ticker": "PG",
@@ -822,7 +636,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 163.56
+      "spot": 162.06
     },
     {
       "ticker": "PLTR",
@@ -832,7 +646,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 178.34
+      "spot": 175.4
     },
     {
       "ticker": "PYPL",
@@ -842,7 +656,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 58.78
+      "spot": 58.21
     },
     {
       "ticker": "QCOM",
@@ -852,7 +666,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 162.08
+      "spot": 164.43
     },
     {
       "ticker": "QQQ",
@@ -862,7 +676,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 681.09
+      "spot": 685.28
     },
     {
       "ticker": "SHOP",
@@ -872,19 +686,19 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 156.22
+      "spot": 142.57
     },
     {
       "ticker": "SLV",
       "status": "ok",
       "reason": "",
       "trend": "strong_downtrend",
-      "iv_rank": 57.9,
+      "iv_rank": 60.4,
       "candidates": [
         "put_debit_spread"
       ],
       "built": 1,
-      "spot": 45.57
+      "spot": 44.84
     },
     {
       "ticker": "SMH",
@@ -894,7 +708,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 508.31
+      "spot": 518.52
     },
     {
       "ticker": "SNOW",
@@ -904,17 +718,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 290.68
+      "spot": 295.04
     },
     {
       "ticker": "SPY",
       "status": "skipped",
-      "reason": "price $752.10 outside $10-$700",
+      "reason": "price $754.35 outside $10-$700",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 752.1
+      "spot": 754.35
     },
     {
       "ticker": "SQ",
@@ -931,12 +745,12 @@
       "status": "filtered",
       "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
       "trend": "uptrend",
-      "iv_rank": 64.3,
+      "iv_rank": 67.3,
       "candidates": [
         "put_credit_spread"
       ],
       "built": 0,
-      "spot": 81.73
+      "spot": 81.11
     },
     {
       "ticker": "TSLA",
@@ -946,7 +760,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 403.82
+      "spot": 398.5
     },
     {
       "ticker": "TXN",
@@ -956,7 +770,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 302.02
+      "spot": 312.49
     },
     {
       "ticker": "UBER",
@@ -966,7 +780,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 66.71
+      "spot": 66.6
     },
     {
       "ticker": "UNH",
@@ -976,7 +790,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 400.44
+      "spot": 404.44
     },
     {
       "ticker": "V",
@@ -986,7 +800,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 425.51
+      "spot": 420.42
     },
     {
       "ticker": "WFC",
@@ -996,7 +810,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 85.89
+      "spot": 85.53
     },
     {
       "ticker": "WMT",
@@ -1006,7 +820,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 127.69
+      "spot": 124.86
     },
     {
       "ticker": "XLE",
@@ -1016,7 +830,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 67.25
+      "spot": 66.68
     },
     {
       "ticker": "XLF",
@@ -1026,7 +840,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 57.56
+      "spot": 57.19
     },
     {
       "ticker": "XLI",
@@ -1036,7 +850,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 169.71
+      "spot": 171.32
     },
     {
       "ticker": "XLK",
@@ -1046,7 +860,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 174.22
+      "spot": 176.51
     },
     {
       "ticker": "XLP",
@@ -1056,7 +870,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 90.83
+      "spot": 88.95
     },
     {
       "ticker": "XLU",
@@ -1066,7 +880,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 43.67
+      "spot": 43.42
     },
     {
       "ticker": "XLV",
@@ -1076,7 +890,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 184.6
+      "spot": 184.02
     },
     {
       "ticker": "XLY",
@@ -1086,7 +900,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 118.16
+      "spot": 117.33
     },
     {
       "ticker": "XOM",
@@ -1096,7 +910,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 179.67
+      "spot": 177.46
     }
   ]
 }
