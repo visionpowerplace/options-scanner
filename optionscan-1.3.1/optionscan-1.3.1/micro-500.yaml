@@ -36,7 +36,7 @@ filters:
   # more is rejected and listed as "over price cap" in the report.
   max_debit_per_share: 1.00
   min_price: 10.0
-  max_price: 700.0
+  max_price: 2000.0   # the $1.00/share cap already limits cost; a high-priced underlying like SPY is still worth scanning
   min_avg_dollar_volume: 150000000.0   # only the deepest names
   min_history_days: 120
 
