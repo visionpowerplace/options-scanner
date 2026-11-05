@@ -1,0 +1,126 @@
+# Paper trading. PAPER ACCOUNT ONLY.
+#
+# WHY FIVE SCHEDULES INSTEAD OF ONE
+# GitHub's cron is best-effort and heavily deprioritised on free public
+# repos. Observed delays here have reached 6h25m, which pushed a 9:45am
+# job past the 3pm close and meant no trade happened at all. A single
+# fixed time therefore cannot work. Five attempts are spread across the
+# session so at least one lands while the market is open.
+#
+# Running several times a day is SAFE and in fact better:
+#   - exits are re-checked each time
+#   - new entries are capped to once per day by the marker file below
+name: Paper trade
+
+on:
+  schedule:
+    - cron: "35 14 * * 1-5"
+    - cron: "15 16 * * 1-5"
+    - cron: "5 18 * * 1-5"
+    - cron: "25 19 * * 1-5"
+    - cron: "40 20 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Print the order payloads without submitting them"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-trade
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate the package
+        id: loc
+        run: |
+          F=$(find . -path '*/optionscan/cli.py' | sort | tail -1)
+          if [ -z "$F" ]; then echo "package not found"; exit 1; fi
+          D=$(dirname "$(dirname "$F")")
+          echo "dir=$D" >> "$GITHUB_OUTPUT"
+          echo "Package root: $D"
+
+      - name: Install dependencies
+        working-directory: ${{ steps.loc.outputs.dir }}
+        run: pip install -r requirements.txt
+
+      - name: Decide what this run may do
+        id: plan
+        run: |
+          TODAY=$(date -u +%F)
+          if [ ! -f state/latest_scan.json ]; then
+            echo "scan=no" >> "$GITHUB_OUTPUT"
+            echo "No scan available yet."
+          else
+            echo "scan=yes" >> "$GITHUB_OUTPUT"
+          fi
+          if [ -f state/last_trade.txt ] && [ "$(cat state/last_trade.txt)" = "$TODAY" ]; then
+            echo "maxnew=0" >> "$GITHUB_OUTPUT"
+            echo "Already opened a position today -- exits only."
+          else
+            echo "maxnew=${{ vars.MAX_NEW_PER_DAY || '1' }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Trade
+        if: steps.plan.outputs.scan == 'yes'
+        working-directory: ${{ steps.loc.outputs.dir }}
+        env:
+          ALPACA_API_KEY_ID: ${{ secrets.ALPACA_API_KEY_ID }}
+          ALPACA_API_SECRET_KEY: ${{ secrets.ALPACA_API_SECRET_KEY }}
+          OPTIONSCAN_HOME: ${{ github.workspace }}/state
+        run: |
+          if [ -z "$ALPACA_API_KEY_ID" ]; then
+            echo "::error::Alpaca paper keys are not set."
+            exit 1
+          fi
+          EXTRA=""
+          if [ "${{ inputs.dry_run }}" = "true" ]; then EXTRA="--dry-run"; fi
+          set -o pipefail
+          python -m optionscan trade --broker alpaca \
+            --ideas "${{ github.workspace }}/state/latest_scan.json" \
+            --journal "${{ github.workspace }}/state/journal.json" \
+            --max-new ${{ steps.plan.outputs.maxnew }} \
+            --max-open ${{ vars.MAX_OPEN || '3' }} \
+            $EXTRA | tee "${{ github.workspace }}/state/last_session.txt"
+
+      - name: Record that the market was open
+        if: steps.plan.outputs.scan == 'yes' && inputs.dry_run != true
+        run: |
+          if grep -qi "market is closed" "${{ github.workspace }}/state/last_session.txt"; then
+            echo "Market was closed -- leaving the day open for a later run."
+          elif [ "${{ steps.plan.outputs.maxnew }}" != "0" ]; then
+            date -u +%F > state/last_trade.txt
+            echo "Marked today as traded."
+          fi
+
+      - name: Commit the journal
+        if: always()
+        run: |
+          git config user.name "options-scanner"
+          git config user.email "actions@github.com"
+          git add state/ 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "paper trade session $(date -u +%Y-%m-%d)"
+            git pull --rebase --autostash || true
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trade-session-${{ github.run_number }}
+          path: state/
+          retention-days: 90
