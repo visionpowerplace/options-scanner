@@ -1,0 +1,106 @@
+# Daily scan. Publishes the dashboard and hands ideas to the trader.
+#
+# Three attempts, because GitHub's scheduler has been running this job
+# hours late -- which put it well after the close, where the feed returns
+# zeros and the scan quietly reports one idea instead of three. The
+# quality gate withholds such a run so it cannot overwrite a good one.
+name: Daily options scan
+
+on:
+  schedule:
+    - cron: "15 20 * * 1-5"   # 2:15pm CT - market open, quotes live
+    - cron: "10 21 * * 1-5"   # 3:10pm CT - just after the close
+    - cron: "10 22 * * 1-5"   # 4:10pm CT - last usable window
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: options-scan
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    outputs:
+      quality: ${{ steps.gate.outputs.quality }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Locate the package
+        id: loc
+        run: |
+          F=$(find . -path '*/optionscan/cli.py' | sort | tail -1)
+          if [ -z "$F" ]; then echo "optionscan package not found"; exit 1; fi
+          echo "dir=$(dirname "$(dirname "$F")")" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        working-directory: ${{ steps.loc.outputs.dir }}
+        run: pip install -r requirements.txt
+
+      - name: Restore IV history
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.optionscan
+          key: iv-${{ github.run_id }}
+          restore-keys: iv-
+
+      - name: Scan, and check the quotes were alive
+        id: gate
+        env:
+          UNIVERSE: ${{ vars.UNIVERSE }}
+          ACCOUNT_SIZE: ${{ vars.ACCOUNT_SIZE }}
+          RISK_PCT: ${{ vars.RISK_PCT }}
+        run: bash .github/scripts/scan.sh "${{ steps.loc.outputs.dir }}"
+
+      - name: Save IV history
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.optionscan
+          key: iv-${{ github.run_id }}
+
+      - name: Publish the scan
+        if: steps.gate.outputs.quality == 'ok'
+        run: bash .github/scripts/publish.sh "${{ steps.loc.outputs.dir }}"
+
+      - name: Explain a withheld scan
+        if: steps.gate.outputs.quality != 'ok'
+        run: |
+          echo "::warning::Quotes were not alive, so the dashboard was NOT"
+          echo "::warning::updated and the trader got NO new ideas."
+          echo "::warning::A later run today will try again."
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scan-${{ github.run_number }}
+          path: public
+          retention-days: 90
+          if-no-files-found: ignore
+
+      - name: Configure Pages
+        if: steps.gate.outputs.quality == 'ok' && vars.PUBLISH_PAGES == 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: steps.gate.outputs.quality == 'ok' && vars.PUBLISH_PAGES == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    if: needs.scan.outputs.quality == 'ok' && vars.PUBLISH_PAGES == 'true'
+    needs: scan
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.d.outputs.page_url }}
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
