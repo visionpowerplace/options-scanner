@@ -1,203 +1,181 @@
 {
-  "as_of": "2026-11-04T01:39:37.699855",
+  "as_of": "2026-11-11T16:53:16.653926",
   "provider": "yahoo",
   "universe_size": 70,
   "scanned": 70,
   "heat": {
-    "total_risk": 59.5,
-    "total_capital": 59.5,
-    "pct_risked": 11.9,
-    "pct_capital": 11.9,
+    "total_risk": 85.5,
+    "total_capital": 85.5,
+    "pct_risked": 17.1,
+    "pct_capital": 17.1,
     "heat_limit_pct": 40.0,
     "over_limit": false
   },
   "advisories": [
     "DATA PROBLEM: 1 of 70 symbols returned no usable data (1% of the universe). The remaining symbols scanned normally, but treat the idea list as partial.",
-    "1 underlying(s) produced valid structures that were too large for your $500 account at 20% risk per trade ($100). The cheapest rejected structure risked $135/contract, which would need risk_per_trade_pct >= 27.0%. Options trade in whole contracts, so small accounts are genuinely limited to lower-priced underlyings and narrow spreads -- that is a real constraint, not a setting to force."
+    "11 underlying(s) produced valid structures that were too large for your $500 account at 20% risk per trade ($100). The cheapest rejected structure risked $114/contract, which would need risk_per_trade_pct >= 22.8%. Options trade in whole contracts, so small accounts are genuinely limited to lower-priced underlyings and narrow spreads -- that is a real constraint, not a setting to force."
   ],
   "errors": [],
   "ideas": [
     {
       "rank": 1,
-      "ticker": "SLV",
-      "strategy": "put_debit_spread",
-      "strategy_name": "Bear Put Debit Spread",
-      "score": 61.4,
-      "spot": 44.84,
-      "expiry": "2026-12-18",
-      "dte": 44,
-      "order": "BUY  2 18-Dec-26 42 PUT / SELL 2 18-Dec-26 41 PUT",
-      "net_cash": -29.75,
-      "entry_limit": 0.3,
+      "ticker": "XLF",
+      "strategy": "long_call",
+      "strategy_name": "Long Call",
+      "score": 81.2,
+      "spot": 58.275001525878906,
+      "expiry": "2027-01-15",
+      "dte": 65,
+      "order": "BUY  1 15-Jan-27 60 CALL",
+      "net_cash": -85.5,
+      "entry_limit": 0.86,
       "entry_type": "debit",
-      "max_profit": 70.25000000000001,
-      "max_loss": 29.749999999999986,
+      "max_profit": null,
+      "max_loss": 85.5,
       "breakevens": [
-        41.7
+        60.85
       ],
-      "pop": 0.3379,
-      "pop_at_rv": 0.3421,
-      "required_pop": 0.3076,
-      "pop_edge": 0.0345,
-      "p_touch_short": 0.5681,
-      "ev_at_rv": 3.29,
-      "ev_at_iv": 2.85,
-      "contracts": 2,
-      "risk_dollars": 59.5,
-      "capital_required": 59.5,
-      "net_delta": -0.049,
-      "net_theta": -0.16,
-      "net_vega": 0.47,
-      "iv_rank": 60.4,
+      "pop": 0.2492,
+      "pop_at_rv": 0.3011,
+      "required_pop": 0.1818,
+      "pop_edge": 0.1193,
+      "p_touch_short": null,
+      "ev_at_rv": 53.91,
+      "ev_at_iv": 1.78,
+      "contracts": 1,
+      "risk_dollars": 85.5,
+      "capital_required": 85.5,
+      "net_delta": 0.3578,
+      "net_theta": -1.18,
+      "net_vega": 9.17,
+      "iv_rank": 0.7,
       "iv_rank_source": "rv_proxy",
-      "iv_rv_ratio": 1.305,
-      "atm_iv": 0.458,
-      "trend_label": "strong_downtrend",
-      "trend_score": -92.9,
-      "adx": 33.4,
+      "iv_rv_ratio": 0.851,
+      "atm_iv": 0.1565,
+      "trend_label": "strong_uptrend",
+      "trend_score": 62.8,
+      "adx": 36.1,
       "earnings_in_days": null,
-      "liq_score": 71.6,
-      "profit_target_price": 0.72,
-      "stop_price": 0.15,
+      "liq_score": 82.5,
+      "profit_target_price": 1.54,
+      "stop_price": 0.47,
       "time_stop_dte": 14,
       "components": {
-        "regime_fit": 80.0,
-        "premium_edge": 26.7,
-        "expected_value": 79.8,
-        "probability": 44.0,
-        "liquidity": 71.6,
-        "structure": 97.4
+        "regime_fit": 76.4,
+        "premium_edge": 100.0,
+        "expected_value": 100.0,
+        "probability": 76.7,
+        "liquidity": 82.5,
+        "structure": 55.0
       },
       "penalties": {
         "iv_rank_estimated": 3.0
       },
       "reasons": [
-        "Bearish structure aligned with a strong downtrend (score -93, strength 86, ADX 33, R\u00b2 0.87)",
-        "Expected value +$3/contract on $30 at risk (+92%/yr annualised) if the stock keeps moving the way it has been"
+        "Bullish structure aligned with a strong uptrend (score +63, strength 70, ADX 36, R\u00b2 0.59)",
+        "IV rank 1 (rv_proxy) -- premium is cheap, favourable for a buyer",
+        "IV only 0.85x realised vol -- not overpaying for movement",
+        "Expected value +$54/contract on $86 at risk (+354%/yr annualised) if the stock keeps moving the way it has been",
+        "Needs a 18% win rate to break even (risking ~$82 to make ~$370 on average); gets 30% at the stock's realised vol -- a +12% edge. At implied vol it is 25%, and that gap is the volatility premium you are being paid"
       ],
-      "warnings": [
-        "Price 3.1 ATR from its 21-EMA -- chasing an extended move",
-        "57% chance of touching the short strike before expiry -- expect it to look ugly even if it finishes a winner",
-        "Risk-reward looks attractive at 2.4:1, but it only wins 34% of the time -- the payoff ratio is high because the odds are poor, not because it is good value"
-      ],
+      "warnings": [],
       "legs": [
         {
           "action": "buy",
-          "kind": "put",
-          "strike": 42.0,
-          "expiry": "2026-12-18",
-          "dte": 44,
-          "bid": 1.34,
-          "ask": 1.39,
-          "mid": 1.365,
-          "iv": 0.4354430151012977,
-          "delta": -0.2944360456934074,
-          "gamma": 0.050851354977393584,
-          "theta": -0.024950247451490846,
-          "vega": 0.053669169873539396,
-          "open_interest": 7387,
-          "volume": 1869,
-          "contract": "SLV261218P00042000",
-          "qty": 1
-        },
-        {
-          "action": "sell",
-          "kind": "put",
-          "strike": 41.0,
-          "expiry": "2026-12-18",
-          "dte": 44,
-          "bid": 1.07,
-          "ask": 1.11,
-          "mid": 1.09,
-          "iv": 0.44431213050716994,
-          "delta": -0.24543056485476278,
-          "gamma": 0.04548938153446242,
-          "theta": -0.023400245273540735,
-          "vega": 0.048987945111440154,
-          "open_interest": 1689,
-          "volume": 88,
-          "contract": "SLV261218P00041000",
+          "kind": "call",
+          "strike": 60.0,
+          "expiry": "2027-01-15",
+          "dte": 65,
+          "bid": 0.84,
+          "ask": 0.86,
+          "mid": 0.85,
+          "iv": 0.1469990849940636,
+          "delta": 0.3578480005248554,
+          "gamma": 0.10310576606101667,
+          "theta": -0.011810018122465493,
+          "vega": 0.09166059332067737,
+          "open_interest": 62789,
+          "volume": 237,
+          "contract": "XLF270115C00060000",
           "qty": 1
         }
       ],
       "plan": {
-        "entry_limit": 0.3,
-        "entry_limit_worst": 0.33,
+        "entry_limit": 0.86,
+        "entry_limit_worst": 0.94,
         "entry_type": "debit",
         "entry_conditions": [
-          "Work a LIMIT order to BUY the spread for $0.30 debit. Do not pay more than $0.33. Start at the mid and walk up a penny at a time; never buy at the natural ask.",
-          "Place the order between 10:00 and 15:30 ET. The first and last 30 minutes have the widest spreads and the worst fills.",
-          "CAUTION: price is 3.1 ATR below its 21-EMA -- stretched to the downside. Prefer a bounce toward 44.84-46.45 before entering."
+          "Work a LIMIT order to BUY the spread for $0.86 debit. Do not pay more than $0.94. Start at the mid and walk up a penny at a time; never buy at the natural ask.",
+          "Place the order between 10:00 and 15:30 ET. The first and last 30 minutes have the widest spreads and the worst fills."
         ],
-        "profit_target_price": 0.72,
-        "profit_target_pnl": 42.25,
-        "profit_target_label": "60% of max profit",
-        "stop_price": 0.15,
-        "stop_pnl": -14.87,
-        "stop_label": "-50% on the debit",
+        "profit_target_price": 1.54,
+        "profit_target_pnl": 68.4,
+        "profit_target_label": "+80% on the premium",
+        "stop_price": 0.47,
+        "stop_pnl": -38.48,
+        "stop_label": "-45% on the premium",
         "time_stop_dte": 14,
-        "invalidation_level": 47.73,
-        "invalidation_label": "bearish thesis fails on a close above 47.73 (1.8 ATR up)",
+        "invalidation_level": 56.66,
+        "invalidation_label": "bullish thesis fails on a close below 56.66 (1.8 ATR down)",
         "exit_rules": [
-          "PROFIT: GTC limit to SELL the spread at $0.72 (60% of max, $42/contract). Waiting for the last few cents of a vertical means holding the worst risk-reward of the whole trade.",
-          "STOP: close at $0.15 (-$15/contract).",
-          "TIME: close by 14 DTE; a debit spread that has not worked by then usually will not.",
-          "UNDERLYING: bearish thesis fails on a close above 47.73 (1.8 ATR up).",
+          "PROFIT: sell at $1.54 (+80%, $68/contract). Consider scaling: sell half there and trail the rest.",
+          "STOP: sell at $0.47 (-45%, -$38/contract).",
+          "TIME: exit by 14 DTE even if flat. Theta decay on a long option becomes brutal inside two weeks.",
+          "UNDERLYING: bullish thesis fails on a close below 56.66 (1.8 ATR down).",
           "Never add to a loser. If the thesis breaks, take the loss and look at the next scan."
         ]
       },
       "size": {
-        "contracts": 2,
-        "risk_dollars": 59.5,
-        "capital_required": 59.5,
-        "pct_of_account_risked": 11.9,
-        "pct_of_account_capital": 11.9,
-        "limiting_factor": "max_contracts cap",
-        "stress_loss": 59.5,
+        "contracts": 1,
+        "risk_dollars": 85.5,
+        "capital_required": 85.5,
+        "pct_of_account_risked": 17.1,
+        "pct_of_account_capital": 17.1,
+        "limiting_factor": "risk limit",
+        "stress_loss": 85.5,
         "warnings": []
       },
       "trend": {
-        "label": "strong_downtrend",
-        "score": -92.9,
-        "strength": 85.9,
-        "adx": 33.4,
-        "rsi": 28.8,
-        "macd_hist": -0.4568,
-        "ema_stack": "----",
-        "slope_ann": -1.5959,
-        "slope_r2": 0.867,
-        "atr_pct": 0.0353,
-        "ext_atr": -3.09,
-        "range_pos": 0.072,
-        "rel_strength": -0.1287,
+        "label": "strong_uptrend",
+        "score": 62.8,
+        "strength": 70.2,
+        "adx": 36.1,
+        "rsi": 60.9,
+        "macd_hist": 0.1742,
+        "ema_stack": "++++",
+        "slope_ann": 0.4419,
+        "slope_r2": 0.595,
+        "atr_pct": 0.0154,
+        "ext_atr": 1.54,
+        "range_pos": 0.756,
+        "rel_strength": 0.0238,
         "components": {
-          "ema_stack": -1.0,
-          "slope": -1.0,
-          "macd": -0.437,
-          "rsi": -0.962,
-          "range_pos": -1.0,
-          "rel_strength": -1.0,
-          "long_term": -1.0,
-          "thrust": -1.0
+          "ema_stack": 1.0,
+          "slope": 0.736,
+          "macd": 0.227,
+          "rsi": 0.497,
+          "range_pos": 0.614,
+          "rel_strength": 0.198,
+          "long_term": 0.555,
+          "thrust": 0.745
         },
-        "notes": [
-          "3.1 ATR from 21-EMA -- extended, poor entry location"
-        ]
+        "notes": []
       },
       "vol": {
-        "atm_iv": 0.458,
-        "rv20": 0.4335,
-        "rv60": 0.4045,
-        "parkinson20": 0.1822,
-        "iv_rv_ratio": 1.305,
-        "iv_rank": 60.4,
+        "atm_iv": 0.1565,
+        "rv20": 0.2158,
+        "rv60": 0.1637,
+        "parkinson20": 0.1526,
+        "iv_rv_ratio": 0.851,
+        "iv_rank": 0.7,
         "iv_rank_source": "rv_proxy",
         "iv_rank_obs": 400,
         "iv_percentile": null,
-        "label": "normal",
+        "label": "cheap",
         "term_slope": NaN,
         "notes": [
-          "IV rank is ESTIMATED from IV/RV (no IV history yet); it becomes a true IV rank after ~40 daily runs"
+          "IV rank is ESTIMATED from IV/RV (no IV history yet); it becomes a true IV rank after ~40 daily runs",
+          "IV/RV 0.85 -- options cheap vs actual movement; favour buying premium"
         ]
       }
     }
@@ -205,53 +183,61 @@
   "diagnostics": [
     {
       "ticker": "AAPL",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 20.6,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 331.9
+      "spot": 354.22
     },
     {
       "ticker": "ABNB",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 2.0,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 166.96
+      "spot": 179.19
     },
     {
       "ticker": "ADBE",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 88.0,
+      "candidates": [
+        "call_credit_spread"
+      ],
       "built": 0,
-      "spot": 246.14
+      "spot": 238.11
     },
     {
       "ticker": "AMD",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score +6, ADX 22) and premium is not rich (IV rank 9) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 9.0,
       "candidates": [],
       "built": 0,
-      "spot": 483.9
+      "spot": 554.39
     },
     {
       "ticker": "AMZN",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 5.3,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 250.69
+      "spot": 267.33
     },
     {
       "ticker": "ARKK",
@@ -261,37 +247,48 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 80.32
+      "spot": 79.49
     },
     {
       "ticker": "AVGO",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 35.8,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 332.13
+      "spot": 354.37
     },
     {
       "ticker": "BA",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 0.4,
+      "candidates": [
+        "put_debit_spread",
+        "long_put"
+      ],
       "built": 0,
-      "spot": 173.31
+      "spot": 173.7
     },
     {
       "ticker": "BAC",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 23.8,
+      "candidates": [
+        "put_debit_spread",
+        "long_put"
+      ],
       "built": 0,
-      "spot": 49.66
+      "spot": 50.67,
+      "too_large": [
+        "long_put: tightest version still risks $114/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "CAT",
@@ -301,37 +298,43 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 623.94
+      "spot": 603.68
     },
     {
       "ticker": "COIN",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 21.1,
+      "candidates": [
+        "put_debit_spread",
+        "long_put"
+      ],
       "built": 0,
-      "spot": 145.45
+      "spot": 137.41,
+      "too_large": [
+        "long_put: tightest version still risks $460/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "COP",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score +17, ADX 30) and premium is not rich (IV rank 25) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 25.1,
       "candidates": [],
       "built": 0,
-      "spot": 144.4
+      "spot": 136.92
     },
     {
       "ticker": "COST",
       "status": "skipped",
-      "reason": "price $1,019.26 outside $10-$700",
+      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 1019.26
+      "spot": 1078.6
     },
     {
       "ticker": "CRM",
@@ -341,7 +344,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 222.2
+      "spot": 217.7
     },
     {
       "ticker": "CVX",
@@ -351,47 +354,57 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 225.27
+      "spot": 212.24
     },
     {
       "ticker": "DIA",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score +16, ADX 14) and premium is not rich (IV rank 16) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 15.6,
       "candidates": [],
       "built": 0,
-      "spot": 517.06
+      "spot": 522.34
     },
     {
       "ticker": "DIS",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 90.2,
+      "candidates": [
+        "put_credit_spread"
+      ],
       "built": 0,
-      "spot": 114.18
+      "spot": 118.82
     },
     {
       "ticker": "EEM",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 40.5,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 61.1
+      "spot": 62.38
     },
     {
       "ticker": "FXI",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "neutral",
+      "iv_rank": 71.6,
+      "candidates": [
+        "iron_condor",
+        "put_credit_spread"
+      ],
       "built": 0,
-      "spot": 33.19
+      "spot": 33.94,
+      "too_large": [
+        "put_credit_spread: tightest version still risks $176/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "GE",
@@ -401,37 +414,45 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 320.67
+      "spot": 341.25
     },
     {
       "ticker": "GLD",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 28.6,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 359.26
+      "spot": 366.38
     },
     {
       "ticker": "GOOGL",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 0.0,
+      "candidates": [
+        "put_debit_spread",
+        "long_put"
+      ],
       "built": 0,
-      "spot": 280.03
+      "spot": 293.05,
+      "too_large": [
+        "long_put: tightest version still risks $324/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "GS",
       "status": "skipped",
-      "reason": "price $896.09 outside $10-$700",
+      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 896.09
+      "spot": 929.2
     },
     {
       "ticker": "HD",
@@ -441,17 +462,19 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 333.66
+      "spot": 347.77
     },
     {
       "ticker": "HYG",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 77.8,
+      "candidates": [
+        "call_credit_spread"
+      ],
       "built": 0,
-      "spot": 76.98
+      "spot": 77.3
     },
     {
       "ticker": "INTC",
@@ -460,23 +483,24 @@
       "trend": "strong_downtrend",
       "iv_rank": 0.0,
       "candidates": [
-        "put_debit_spread"
+        "put_debit_spread",
+        "long_put"
       ],
       "built": 0,
-      "spot": 60.55,
+      "spot": 63.97,
       "too_large": [
-        "put_debit_spread: tightest version still risks $135/contract vs $100 budget"
+        "long_put: tightest version still risks $209/contract vs $100 budget"
       ]
     },
     {
       "ticker": "IWM",
       "status": "no_edge",
-      "reason": "No trend (score +2, ADX 28) and premium is not rich (IV rank 61) -- nothing to buy, nothing worth selling",
+      "reason": "No trend (score +11, ADX 21) and premium is not rich (IV rank 7) -- nothing to buy, nothing worth selling",
       "trend": "neutral",
-      "iv_rank": 61.1,
+      "iv_rank": 6.8,
       "candidates": [],
       "built": 0,
-      "spot": 279.79
+      "spot": 282.67
     },
     {
       "ticker": "JNJ",
@@ -486,7 +510,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 266.17
+      "spot": 277.42
     },
     {
       "ticker": "JPM",
@@ -496,27 +520,33 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 337.98
+      "spot": 343.23
     },
     {
       "ticker": "KO",
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 30.5,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
+      "built": 0,
+      "spot": 96.47,
+      "too_large": [
+        "long_call: tightest version still risks $177/contract vs $100 budget"
+      ]
+    },
+    {
+      "ticker": "LLY",
       "status": "skipped",
       "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
       "trend": "",
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 94.8
-    },
-    {
-      "ticker": "LLY",
-      "status": "skipped",
-      "reason": "price $1,409.38 outside $10-$700",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
-      "built": 0,
-      "spot": 1409.38
+      "spot": 1422.81
     },
     {
       "ticker": "MA",
@@ -526,27 +556,35 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 647.18
+      "spot": 653.56
     },
     {
       "ticker": "MCD",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 0.0,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
       "built": 0,
-      "spot": 263.04
+      "spot": 275.58,
+      "too_large": [
+        "long_call: tightest version still risks $205/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "META",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 49.3,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 621.03
+      "spot": 641.21
     },
     {
       "ticker": "MRNA",
@@ -556,77 +594,99 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 228.44
+      "spot": 243.69
     },
     {
       "ticker": "MSFT",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 6.7,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 520.99
+      "spot": 519.34
     },
     {
       "ticker": "MU",
-      "status": "skipped",
-      "reason": "price $855.10 outside $10-$700",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 12.0,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 855.1
+      "spot": 825.39
     },
     {
       "ticker": "NFLX",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 19.4,
+      "candidates": [
+        "put_debit_spread",
+        "long_put"
+      ],
       "built": 0,
-      "spot": 63.42
+      "spot": 63.7,
+      "too_large": [
+        "long_put: tightest version still risks $203/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "NVDA",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 37.6,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 206.69
+      "spot": 175.77
     },
     {
       "ticker": "ORCL",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 19.7,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 126.19
+      "spot": 128.6
     },
     {
       "ticker": "PEP",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 19.5,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
       "built": 0,
-      "spot": 137.27
+      "spot": 141.34,
+      "too_large": [
+        "long_call: tightest version still risks $209/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "PFE",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 32.8,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 30.0
+      "spot": 29.09
     },
     {
       "ticker": "PG",
@@ -636,27 +696,31 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 162.06
+      "spot": 166.96
     },
     {
       "ticker": "PLTR",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 23.0,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 175.4
+      "spot": 172.76
     },
     {
       "ticker": "PYPL",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 21.2,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 58.21
+      "spot": 59.02
     },
     {
       "ticker": "QCOM",
@@ -666,17 +730,19 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 164.43
+      "spot": 178.41
     },
     {
       "ticker": "QQQ",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "downtrend",
+      "iv_rank": 0.0,
+      "candidates": [
+        "put_debit_spread"
+      ],
       "built": 0,
-      "spot": 685.28
+      "spot": 692.9
     },
     {
       "ticker": "SHOP",
@@ -686,29 +752,31 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 142.57
+      "spot": 149.21
     },
     {
       "ticker": "SLV",
-      "status": "ok",
-      "reason": "",
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
       "trend": "strong_downtrend",
-      "iv_rank": 60.4,
+      "iv_rank": 38.2,
       "candidates": [
         "put_debit_spread"
       ],
-      "built": 1,
-      "spot": 44.84
+      "built": 0,
+      "spot": 46.92
     },
     {
       "ticker": "SMH",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_downtrend",
+      "iv_rank": 63.1,
+      "candidates": [
+        "call_credit_spread"
+      ],
       "built": 0,
-      "spot": 518.52
+      "spot": 513.62
     },
     {
       "ticker": "SNOW",
@@ -718,17 +786,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 295.04
+      "spot": 306.9
     },
     {
       "ticker": "SPY",
-      "status": "skipped",
-      "reason": "price $754.35 outside $10-$700",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score -1, ADX 16) and premium is not rich (IV rank 0) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 0.0,
       "candidates": [],
       "built": 0,
-      "spot": 754.35
+      "spot": 759.55
     },
     {
       "ticker": "SQ",
@@ -742,25 +810,25 @@
     },
     {
       "ticker": "TLT",
-      "status": "filtered",
-      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
-      "trend": "uptrend",
-      "iv_rank": 67.3,
-      "candidates": [
-        "put_credit_spread"
-      ],
+      "status": "no_edge",
+      "reason": "No trend (score -2, ADX 16) and premium is not rich (IV rank 36) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 35.7,
+      "candidates": [],
       "built": 0,
-      "spot": 81.11
+      "spot": 80.75
     },
     {
       "ticker": "TSLA",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 8.2,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 398.5
+      "spot": 393.12
     },
     {
       "ticker": "TXN",
@@ -770,17 +838,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 312.49
+      "spot": 312.72
     },
     {
       "ticker": "UBER",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score -3, ADX 28) and premium is not rich (IV rank 35) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 34.7,
       "candidates": [],
       "built": 0,
-      "spot": 66.6
+      "spot": 69.89
     },
     {
       "ticker": "UNH",
@@ -790,7 +858,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 404.44
+      "spot": 399.2
     },
     {
       "ticker": "V",
@@ -800,47 +868,54 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 420.42
+      "spot": 421.7
     },
     {
       "ticker": "WFC",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "uptrend",
+      "iv_rank": 27.9,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 85.53
+      "spot": 85.63
     },
     {
       "ticker": "WMT",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 51.5,
+      "candidates": [
+        "call_debit_spread"
+      ],
       "built": 0,
-      "spot": 124.86
+      "spot": 124.34
     },
     {
       "ticker": "XLE",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score -12, ADX 27) and premium is not rich (IV rank 9) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 9.3,
       "candidates": [],
       "built": 0,
-      "spot": 66.68
+      "spot": 62.99
     },
     {
       "ticker": "XLF",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
-      "built": 0,
-      "spot": 57.19
+      "status": "ok",
+      "reason": "",
+      "trend": "strong_uptrend",
+      "iv_rank": 0.7,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
+      "built": 1,
+      "spot": 58.28
     },
     {
       "ticker": "XLI",
@@ -850,7 +925,7 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 171.32
+      "spot": 170.75
     },
     {
       "ticker": "XLK",
@@ -860,37 +935,52 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 176.51
+      "spot": 175.66
     },
     {
       "ticker": "XLP",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 11.0,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
       "built": 0,
-      "spot": 88.95
+      "spot": 90.54,
+      "too_large": [
+        "long_call: tightest version still risks $202/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "XLU",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 25.7,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
       "built": 0,
-      "spot": 43.42
+      "spot": 43.64,
+      "too_large": [
+        "long_call: tightest version still risks $228/contract vs $100 budget"
+      ]
     },
     {
       "ticker": "XLV",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
-      "candidates": [],
+      "status": "filtered",
+      "reason": "built 0 structure(s); none cleared score 50 / sizing limits",
+      "trend": "strong_uptrend",
+      "iv_rank": 15.3,
+      "candidates": [
+        "call_debit_spread",
+        "long_call"
+      ],
       "built": 0,
-      "spot": 184.02
+      "spot": 187.44
     },
     {
       "ticker": "XLY",
@@ -900,17 +990,17 @@
       "iv_rank": null,
       "candidates": [],
       "built": 0,
-      "spot": 117.33
+      "spot": 120.68
     },
     {
       "ticker": "XOM",
-      "status": "skipped",
-      "reason": "no contracts passed the liquidity filter (OI>=500, vol>=0, spread<=12% and <=$0.08, bid>=$0.05)",
-      "trend": "",
-      "iv_rank": null,
+      "status": "no_edge",
+      "reason": "No trend (score -1, ADX 30) and premium is not rich (IV rank 24) -- nothing to buy, nothing worth selling",
+      "trend": "neutral",
+      "iv_rank": 23.8,
       "candidates": [],
       "built": 0,
-      "spot": 177.46
+      "spot": 165.77
     }
   ]
 }
