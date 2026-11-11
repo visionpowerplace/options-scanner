@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "id": "XLF-2027-01-15-long_call",
+    "ticker": "XLF",
+    "strategy": "long_call",
+    "opened_on": "2026-11-11",
+    "expiry": "2027-01-15",
+    "legs": [
+      {
+        "symbol": "XLF270115C00060000",
+        "side": "buy",
+        "ratio": 1
+      }
+    ],
+    "qty": 1,
+    "score": 81.2,
+    "pop": 0.2492,
+    "pop_at_rv": 0.3011,
+    "breakeven_win_rate": 0.1818,
+    "ev_at_rv": 53.91,
+    "scan_net": 0.85,
+    "iv_rank": 0.7,
+    "iv_rv_ratio": 0.851,
+    "entry_order_id": "304749f6-7a9b-4420-a2fb-fe7f130aac7d",
+    "entry_net": 0.86,
+    "entry_slippage": 0.5,
+    "target_net": -1.55,
+    "stop_net": -0.43,
+    "time_stop_dte": 14,
+    "max_loss": 85.5,
+    "status": "open",
+    "exit_order_id": "",
+    "exit_net": null,
+    "closed_on": "",
+    "exit_reason": "",
+    "pnl": null,
+    "exit_attempts": 0,
+    "pending_exit_reason": "",
+    "notes": []
+  }
+]
