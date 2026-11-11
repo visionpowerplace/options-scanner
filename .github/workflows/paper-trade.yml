@@ -99,7 +99,7 @@ jobs:
         run: |
           if grep -qi "market is closed" "${{ github.workspace }}/state/last_session.txt"; then
             echo "Market was closed -- leaving the day open for a later run."
-          elif [ "${{ steps.plan.outputs.maxnew }}" != "0" ]; then
+              elif grep -qE "Entered [1-9]" "${{ github.workspace }}/state/last_session.txt"; then
             date -u +%F > state/last_trade.txt
             echo "Marked today as traded."
           fi
