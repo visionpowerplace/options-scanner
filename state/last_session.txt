@@ -1,3 +1,21 @@
 Loaded 1 idea(s) from /home/runner/work/options-scanner/options-scanner/state/latest_scan.json
-The market is closed. Orders would queue until the next session.
-Re-run during market hours, or pass --force to submit anyway.
+
+Paper trading via alpaca-paper
+==========================================================================
+Managing open positions...
+Considering new ideas...
+==========================================================================
+Entered 0   exits 0   skipped 0   open now 1
+Account equity: $4,997.82
+
+Journal: /home/runner/work/options-scanner/options-scanner/state/journal.json
+
+======================================================================================
+                                PAPER TRADING SCORECARD                               
+======================================================================================
+  Closed trades: 0      Still open: 1
+
+  Nothing has closed yet. Come back after a few weeks -- the scorecard
+  needs completed trades, not open ones, because an open position's
+  paper P&L tells you nothing until it is realised.
+======================================================================================
